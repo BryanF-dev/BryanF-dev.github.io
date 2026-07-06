@@ -131,14 +131,26 @@ img {
 .hero-bg {
   position: absolute;
   inset: 0;
+  z-index: 1;
   background:
-    linear-gradient(112deg, rgba(13, 5, 100, 0.98) 0%, rgba(23, 0, 157, 0.86) 52%, rgba(240, 0, 0, 0.86) 100%),
-    linear-gradient(0deg, rgba(0, 0, 0, 0.24), rgba(0, 0, 0, 0.24));
+    linear-gradient(112deg, rgba(13, 5, 100, 0.84) 0%, rgba(23, 0, 157, 0.7) 52%, rgba(240, 0, 0, 0.7) 100%),
+    linear-gradient(0deg, rgba(0, 0, 0, 0.34), rgba(0, 0, 0, 0.34));
+  pointer-events: none;
+}
+
+.hero-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  opacity: 0.9;
 }
 
 .hero-content {
   position: relative;
-  z-index: 1;
+  z-index: 2;
   align-self: end;
   width: min(1020px, calc(100% - 40px));
   margin: 0 auto clamp(42px, 8vh, 82px);
