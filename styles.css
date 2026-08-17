@@ -46,7 +46,10 @@ img {
   gap: 22px;
   min-height: 76px;
   padding: 14px clamp(20px, 5vw, 64px);
-  color: var(--white);
+  color: var(--ink);
+  background: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 12px 30px rgba(16, 24, 39, 0.1);
+  backdrop-filter: blur(16px);
   transition: background 180ms ease, box-shadow 180ms ease, color 180ms ease;
 }
 
@@ -80,8 +83,8 @@ img {
   flex: 0 0 auto;
   place-items: center;
   border-radius: 8px;
-  color: var(--red);
-  background: var(--white);
+  color: var(--white);
+  background: var(--red);
   font-size: 1.6rem;
   line-height: 1;
 }
