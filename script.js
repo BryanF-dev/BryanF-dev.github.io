@@ -7,30 +7,38 @@ const mapHeading = document.querySelector("[data-map-heading]");
 const mapOpen = document.querySelector("[data-map-open]");
 
 function syncHeader() {
+  if (!header) {
+    return;
+  }
+
   header.classList.toggle("is-scrolled", window.scrollY > 20);
 }
 
-window.addEventListener("scroll", syncHeader, { passive: true });
-syncHeader();
+if (header) {
+  window.addEventListener("scroll", syncHeader, { passive: true });
+  syncHeader();
+}
 
-menuToggle.addEventListener("click", () => {
-  const isOpen = nav.classList.toggle("is-open");
-  header.classList.toggle("is-open", isOpen);
-  menuToggle.setAttribute("aria-expanded", String(isOpen));
-});
+if (menuToggle && nav && header) {
+  menuToggle.addEventListener("click", () => {
+    const isOpen = nav.classList.toggle("is-open");
+    header.classList.toggle("is-open", isOpen);
+    menuToggle.setAttribute("aria-expanded", String(isOpen));
+  });
 
-nav.addEventListener("click", (event) => {
-  if (event.target.matches("a")) {
-    nav.classList.remove("is-open");
-    header.classList.remove("is-open");
-    menuToggle.setAttribute("aria-expanded", "false");
-  }
-});
+  nav.addEventListener("click", (event) => {
+    if (event.target.matches("a")) {
+      nav.classList.remove("is-open");
+      header.classList.remove("is-open");
+      menuToggle.setAttribute("aria-expanded", "false");
+    }
+  });
+}
 
 document.addEventListener("click", (event) => {
   const button = event.target.closest("[data-map-query]");
 
-  if (!button) {
+  if (!button || !mapPanel || !mapFrame || !mapHeading || !mapOpen) {
     return;
   }
 
@@ -47,6 +55,11 @@ document.addEventListener("click", (event) => {
   mapPanel.hidden = false;
 
   document.querySelectorAll(".unit-card").forEach((card) => card.classList.remove("is-selected"));
-  button.closest(".unit-card").classList.add("is-selected");
+  const unitCard = button.closest(".unit-card");
+
+  if (unitCard) {
+    unitCard.classList.add("is-selected");
+  }
+
   mapPanel.scrollIntoView({ behavior: "smooth", block: "start" });
 });
